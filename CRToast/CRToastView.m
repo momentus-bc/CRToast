@@ -187,7 +187,8 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
                                                                   self.toast.imageAlignment,
                                                                   self.toast.showActivityIndicator,
                                                                   self.toast.activityViewAlignment)-40;
-    
+    x = MAX(x,16);
+
     if (self.toast.subtitleText == nil) {
         self.label.frame = CGRectMake(x,
                                       statusBarYOffset,
