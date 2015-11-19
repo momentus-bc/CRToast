@@ -27,5 +27,6 @@ CGFloat CRContentWidthForAccessoryViewsWithAlignments(CGFloat fullContentWidth, 
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) UILabel *subtitleLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIButton *closeButton;
 
 @end

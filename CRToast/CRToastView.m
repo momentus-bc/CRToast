@@ -120,9 +120,24 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
         [self addSubview:subtitleLabel];
         self.subtitleLabel = subtitleLabel;
         
+        UIButton *closeButton = [[UIButton alloc] init];
+        [closeButton setTitle:@"dismiss" forState:UIControlStateNormal];
+        [closeButton addTarget:self action:@selector(didTapCloseButton:) forControlEvents:UIControlEventTouchUpInside];
+        closeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
+        [closeButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [closeButton sizeToFit];
+        closeButton.center = CGPointMake(self.bounds.size.width - closeButton.frame.size.width/2 - 10, self.center.y);
+        [self addSubview:closeButton];
+        self.closeButton = closeButton;
+        
         self.isAccessibilityElement = YES;
     }
     return self;
+}
+
+- (void)didTapCloseButton:(UIButton *)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kNotificationCloseNotification" object:nil];
 }
 
 - (void)layoutSubviews {
@@ -133,6 +148,8 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     
     CGFloat statusBarYOffset = self.toast.displayUnderStatusBar ? (CRGetStatusBarHeight()+CRStatusBarViewUnderStatusBarYOffsetAdjustment) : 0;
     contentFrame.size.height = CGRectGetHeight(contentFrame) - statusBarYOffset;
+    
+    self.closeButton.hidden = !self.toast.showCloseButton;
     
     self.backgroundView.frame = self.bounds;
     
