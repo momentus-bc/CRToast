@@ -127,7 +127,7 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
         closeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
         [closeButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [closeButton sizeToFit];
-        closeButton.center = CGPointMake(self.bounds.size.width - closeButton.frame.size.width/2 - 10, self.center.y);
+        closeButton.center = CGPointMake(self.bounds.size.width - closeButton.frame.size.width/2 - 10, self.center.y+6);
         [self addSubview:closeButton];
         self.closeButton = closeButton;
         
@@ -186,7 +186,7 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
                                                                   showingImage,
                                                                   self.toast.imageAlignment,
                                                                   self.toast.showActivityIndicator,
-                                                                  self.toast.activityViewAlignment);
+                                                                  self.toast.activityViewAlignment)-40;
     
     if (self.toast.subtitleText == nil) {
         self.label.frame = CGRectMake(x,
