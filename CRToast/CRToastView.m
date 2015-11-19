@@ -121,7 +121,8 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
         self.subtitleLabel = subtitleLabel;
         
         UIButton *closeButton = [[UIButton alloc] init];
-        [closeButton setTitle:@"dismiss" forState:UIControlStateNormal];
+//        [closeButton setTitle:@"dismiss" forState:UIControlStateNormal];
+        [closeButton setImage:[UIImage imageNamed:@"icon-cancel"] forState:UIControlStateNormal];
         [closeButton addTarget:self action:@selector(didTapCloseButton:) forControlEvents:UIControlEventTouchUpInside];
         closeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
         [closeButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
