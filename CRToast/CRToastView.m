@@ -285,8 +285,26 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
 
 - (void)setToast:(CRToast *)toast {
     _toast = toast;
-    _label.text = toast.text;
-    _label.font = toast.font;
+    NSRange breakLocation = [toast.text rangeOfString:@"\n"];
+    
+    if (breakLocation.location != NSNotFound) {
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:toast.text];
+        [attributedText beginEditing];
+        [attributedText addAttribute:NSFontAttributeName
+                               value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]
+                               range:NSMakeRange(0, breakLocation.location)];
+        [attributedText addAttribute:NSFontAttributeName
+                               value:toast.font
+                               range:NSMakeRange(breakLocation.location+1, attributedText.length-breakLocation.location-1)];
+        
+        [attributedText endEditing];
+        _label.attributedText = attributedText;
+    }
+    else {
+        _label.text = toast.text;
+        _label.font = toast.font;
+    }
+    
     _label.textColor = toast.textColor;
     _label.textAlignment = toast.textAlignment;
     _label.numberOfLines = toast.textMaxNumberOfLines;
